@@ -32,5 +32,5 @@ def generate_pdf(request: PDFRequest):
         raise HTTPException(status_code=500, detail=str(e))
 
 if __name__ == "__main__":
-    port = int(os.environ.get("PORT", 8000))  # ✅ Use Railway's dynamic port
+    port = int(os.environ.get("PORT", 5000))  # ✅ Use Railway's dynamic port
     uvicorn.run("api.main:app", host="0.0.0.0", port=port)
