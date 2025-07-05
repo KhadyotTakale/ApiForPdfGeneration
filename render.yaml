@@ -1,0 +1,5 @@
+build:
+  preBuild:
+    - pip install playwright
+  postBuild:
+    - playwright install
