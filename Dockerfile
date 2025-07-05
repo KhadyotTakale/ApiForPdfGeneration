@@ -35,8 +35,8 @@ RUN pip install --no-cache-dir -r requirements.txt
 # Install Playwright and its browser binaries
 RUN playwright install --with-deps
 
-# Expose default port (symbolic, Railway/Render assigns actual port via env)
+# Expose port (for documentation only, not used by Railway)
 EXPOSE 8000
 
-# Start FastAPI using uvicorn
-CMD ["uvicorn", "api.main:app", "--host", "0.0.0.0", "--port", "8000"]
+# Start FastAPI using uvicorn and Railway-provided port
+CMD ["sh", "-c", "uvicorn api.main:app --host 0.0.0.0 --port ${PORT:-8000}"]
