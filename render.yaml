@@ -1,12 +1,7 @@
 services:
   - type: web
-    name: ApiForPdfGeneration
-    env: python
+    name: pdf-api
+    env: docker
     plan: free
-    buildCommand: |
-      pip install -r requirements.txt
-      playwright install chromium
-    startCommand: uvicorn api.main:app --host=0.0.0.0 --port=10000
-    envVars:
-      - key: PYTHONUNBUFFERED
-        value: "1"
+    region: singapore
+    autoDeploy: true
