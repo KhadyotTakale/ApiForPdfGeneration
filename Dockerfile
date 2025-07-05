@@ -23,20 +23,20 @@ RUN apt-get update && apt-get install -y \
     wget \
     && apt-get clean
 
-# Set workdir
+# Set working directory
 WORKDIR /app
 
-# Copy your code
+# Copy project files into the container
 COPY . .
 
 # Install Python dependencies
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Install Playwright browsers
+# Install Playwright and its browser binaries
 RUN playwright install --with-deps
 
-# Expose port
+# Expose default port (symbolic, Railway/Render assigns actual port via env)
 EXPOSE 8000
 
-# Run FastAPI app with uvicorn
+# Start FastAPI using uvicorn
 CMD ["uvicorn", "api.main:app", "--host", "0.0.0.0", "--port", "8000"]
