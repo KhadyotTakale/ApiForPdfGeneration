@@ -1,5 +1,7 @@
-build:
-  preBuild:
-    - pip install playwright
-  postBuild:
-    - playwright install
+services:
+  - type: web
+    name: fastapi-pdf-api
+    env: python
+    buildCommand: ""
+    startCommand: uvicorn api.main:app --host=0.0.0.0 --port=10000
+    plan: free
