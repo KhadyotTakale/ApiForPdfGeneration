@@ -6,6 +6,6 @@
     "buildCommand": "pip install -r requirements.txt && playwright install"
   },
   "deploy": {
-    "startCommand": "uvicorn api.main:app --host=0.0.0.0 --port=${PORT:-8000}"
+    "startCommand": "python api/main.py"
   }
 }
