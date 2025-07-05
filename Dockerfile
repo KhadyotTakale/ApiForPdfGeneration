@@ -26,17 +26,17 @@ RUN apt-get update && apt-get install -y \
 # Set working directory
 WORKDIR /app
 
-# Copy project files into the container
+# Copy project files
 COPY . .
 
-# Install Python dependencies
+# Install Python packages
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Install Playwright and its browser binaries
+# Install Playwright and its dependencies
 RUN playwright install --with-deps
 
-# Expose port (for documentation only, not used by Railway)
+# Expose port (Render uses environment variable for actual port)
 EXPOSE 8000
 
-# Start FastAPI using uvicorn and Railway-provided port
+# Run FastAPI app using uvicorn and dynamic port
 CMD ["sh", "-c", "uvicorn api.main:app --host 0.0.0.0 --port ${PORT:-8000}"]
