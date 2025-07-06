@@ -21,16 +21,25 @@ def generate_pdf(request: PDFRequest):
             page.wait_for_timeout(3000)
 
             with tempfile.NamedTemporaryFile(delete=False, suffix=".pdf") as tmp:
+                pdf_path = tmp.name
                 page.pdf(
-                    path=tmp.name,
+                    path=pdf_path,
                     format="A4",
                     print_background=True,
                     margin={"top": "0px", "bottom": "0px", "left": "0px", "right": "0px"},
                     scale=1,
                     display_header_footer=False
                 )
-                browser.close()
-                return FileResponse(tmp.name, filename="invoice.pdf", media_type="application/pdf")
+
+            browser.close()
+
+            return FileResponse(
+                pdf_path,
+                filename="invoice.pdf",
+                media_type="application/pdf",
+                headers={"Content-Disposition": "attachment; filename=invoice.pdf"},
+                background=lambda: os.remove(pdf_path)  # ✅ Auto-delete
+            )
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
 
