@@ -20,7 +20,7 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-START_WEBHOOK_URL = os.getenv("START_WEBHOOK_URL", "https://web-production-1675c.up.railway.app/start-webhook")
+START_WEBHOOK_URL = os.getenv("START_WEBHOOK_URL", "https://webhook.site/033a7bf5-30c8-43bb-bc22-7647e6910f2a")
 
 class PDFRequest(BaseModel):
     url: str
