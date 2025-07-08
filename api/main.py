@@ -102,6 +102,11 @@ def generate_pdf(
         headers={"Content-Disposition": "attachment; filename=invoice.pdf"}
     )
 
+if __name__ == "__main__":
+    import uvicorn
+    uvicorn.run(app, host="0.0.0.0", port=int(os.environ.get("PORT", 8000)))
+
+
 # @app.post("/start-webhook")
 # def mock_start_webhook(data: dict):
 #     print("📡 Start webhook hit:")
