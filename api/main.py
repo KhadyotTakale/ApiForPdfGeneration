@@ -13,7 +13,6 @@ class PDFRequest(BaseModel):
 
 @app.post("/generate-pdf")
 def generate_pdf(payload: PDFRequest):
-    # Extract ID from URL
     path = urlparse(payload.url).path
     invoice_id = path.rstrip("/").split("/")[-1]
     print("Extracted ID:", invoice_id)
@@ -37,7 +36,7 @@ def generate_pdf(payload: PDFRequest):
         media_type="application/pdf",
         headers={
             "Content-Disposition": f"attachment; filename={invoice_id}.pdf",
-            "X-INVOICE-ID": invoice_id  # ✅ You can see this in Postman response headers
+            "X-INVOICE-ID": invoice_id  
         }
     )
 
